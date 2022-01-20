@@ -1,20 +1,28 @@
-Material Characters
+Marvel Characters
+===================================
 
 A Multi Modular Android Application showing a list of Marvel characters and his details. 
+
+How to run
+------------
 
 In order to run this application, an apikey.properties file is required. Place it in the root proyect. 
 
 This file will contain the public and private keys provided by your Marvel developer account.
 
-Example:
+Inside the apikey.properties file, place the two properties like the following:
 
 PUBLIC_KEY="XXXXXXXXX"
+
 PRIVATE_KEY="XXXXXXXXXXXXXXXXXXXXXX"
 
+Architecture
+------------
 
 Structured using Clean Architecture + MVVM
 
-Modules:
+Modules
+------------
 
 	-app: dagger graph, main navigation activity, unit and android test related classes
 	
