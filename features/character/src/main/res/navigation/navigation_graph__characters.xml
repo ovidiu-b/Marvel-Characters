@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph__characters"
+    app:startDestination="@id/characterGridFragment">
+
+    <fragment android:id="@+id/characterGridFragment"
+        android:name="es.openbank.character.ui.fragment.CharacterGridFragment"
+        tools:layout="@layout/fragment__character_grid">
+
+        <action
+            android:id="@+id/goToCharacterDetail"
+            app:destination="@id/characterDetailFragment" />
+
+    </fragment>
+
+    <fragment android:id="@+id/characterDetailFragment"
+        android:name="es.openbank.character.ui.fragment.CharacterDetailFragment"
+        tools:layout="@layout/fragment__character_detail">
+
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+
+</navigation>

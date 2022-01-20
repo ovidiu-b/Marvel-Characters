@@ -1,0 +1,7 @@
+import es.openbank.dev.dependencies.Modules
+
+apply from: "$rootDir/kotlin_module.gradle"
+
+dependencies {
+    implementation project(Modules.dataModel)
+}

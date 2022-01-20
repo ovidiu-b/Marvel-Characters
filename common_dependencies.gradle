@@ -1,0 +1,9 @@
+import es.openbank.dev.dependencies.Dependencies
+
+dependencies {
+    implementation Dependencies.Kotlin.stdlibJdk7
+    implementation Dependencies.Kotlin.coroutineCore
+
+    implementation Dependencies.Dagger.core
+    kapt Dependencies.Dagger.coreCompiler
+}

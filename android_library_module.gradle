@@ -1,0 +1,5 @@
+import es.openbank.dev.dependencies.Plugins
+
+apply plugin: Plugins.androidLibrary
+apply from: "$rootDir/kotlin_android.gradle"
+apply from: "$rootDir/common_dependencies.gradle"

@@ -1,0 +1,49 @@
+import es.openbank.dev.AppConfig
+import es.openbank.dev.dependencies.Dependencies
+import es.openbank.dev.dependencies.Plugins
+
+apply plugin: Plugins.kotlinAndroid
+apply plugin: Plugins.kotlinKapt
+apply plugin: Plugins.kotlinAndroidExtensions
+
+android {
+    compileSdkVersion AppConfig.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion AppConfig.minSdkVersion
+        targetSdkVersion AppConfig.targetSdkVersion
+        versionCode AppConfig.versionCode
+        versionName AppConfig.versionName
+
+        testInstrumentationRunner AppConfig.testInstrumentationRunner
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    packagingOptions {
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
+    }
+}
+
+dependencies {
+    implementation Dependencies.Kotlin.coroutineAndroid
+    implementation Dependencies.Kotlin.ktxCore
+
+    implementation Dependencies.Dagger.androidSupport
+    kapt Dependencies.Dagger.androidCompiler
+
+    implementation Dependencies.Androidx.lifecycleExtensions
+    implementation Dependencies.Androidx.livedataKtxExtensions
+}

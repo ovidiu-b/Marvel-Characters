@@ -1,0 +1,39 @@
+import es.openbank.dev.dependencies.Plugins
+import es.openbank.dev.dependencies.Dependencies
+import es.openbank.dev.dependencies.Modules
+
+apply plugin: Plugins.androidApplication
+apply from: "$rootDir/kotlin_android.gradle"
+apply from: "$rootDir/common_dependencies.gradle"
+apply from: "$rootDir/feature.gradle"
+apply from: "$rootDir/test_android.gradle"
+
+def apikeyPropertiesFile = rootProject.file("apikey.properties")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
+android {
+    defaultConfig {
+        buildConfigField "String", "PUBLIC_KEY", apikeyProperties["PUBLIC_KEY"]
+        buildConfigField "String", "PRIVATE_KEY", apikeyProperties["PRIVATE_KEY"]
+    }
+}
+
+dependencies {
+    implementation Dependencies.Retrofit.core
+    implementation Dependencies.Retrofit.moshiConverter
+    implementation Dependencies.OkHttp.httpLoggingInterceptor
+
+    implementation project(Modules.dataDatasource)
+    implementation project(Modules.dataLocal)
+    implementation project(Modules.dataRepository)
+    implementation project(Modules.dataRemote)
+    implementation project(Modules.dataConfig)
+
+    implementation project(Modules.featureCharacter)
+
+    implementation project(Modules.navigation)
+
+    kaptTest Dependencies.Dagger.coreCompiler
+    kaptAndroidTest Dependencies.Dagger.coreCompiler
+}

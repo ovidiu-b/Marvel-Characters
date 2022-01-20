@@ -1,0 +1,16 @@
+import es.openbank.dev.dependencies.Dependencies
+import es.openbank.dev.dependencies.Modules
+
+apply from: "$rootDir/kotlin_module.gradle"
+
+dependencies {
+    implementation Dependencies.Retrofit.core
+    implementation Dependencies.Retrofit.moshiConverter
+    implementation Dependencies.OkHttp.httpLoggingInterceptor
+
+    implementation Dependencies.Moshi.core
+    kapt Dependencies.Moshi.codegen
+
+    implementation project(Modules.dataDatasource)
+    implementation project(Modules.dataModel)
+}

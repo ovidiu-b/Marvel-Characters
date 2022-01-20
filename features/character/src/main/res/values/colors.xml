@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="marvel">#EE171F</color>
+    <color name="marvel_dark">#150e41</color>
+
+    <color name="characters_grid_toolbar_color">@color/marvel</color>
+    <color name="characters_grid_background">@color/marvel_dark</color>
+</resources>

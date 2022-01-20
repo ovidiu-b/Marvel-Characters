@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="es.openbank.character.ui.viewModel.ComicGridViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/comicGridList"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:comicsGridList="@{viewModel.comicsLiveData}"
+            app:hideWhenLoading="@{viewModel.comicsLiveData}"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            app:setGridSpacingItemDecorationSpanCount="@{2}"
+            app:setGridSpacingItemDecorationSpacing="@{@dimen/grid_items_spacing}"
+            app:setGridSpacingItemDecorationIncludeEdge="@{true}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/row__item_grid"
+            tools:padding="20dp"/>
+
+        <TextView
+            android:id="@+id/comicGridEmptyListMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/character_has_no_comics"
+            android:textColor="@android:color/white"
+            android:textSize="17sp"
+            android:visibility="gone"
+            app:showIfAsyncResultSuccessButEmpty="@{viewModel.comicsLiveData}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ProgressBar
+            android:id="@+id/comicGridProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:indeterminateTint="@android:color/white"
+            app:showWhenLoading="@{viewModel.comicsLiveData}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

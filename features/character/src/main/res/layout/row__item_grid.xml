@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="id"
+            type="Integer" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="imageUrl"
+            type="String" />
+
+        <variable
+            name="listener"
+            type="es.openbank.character.ui.adapter.RowItemClickListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/itemGridCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{() -> listener.onItemClicked(id)}"
+        app:cardCornerRadius="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/itemGridImage"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:imageUrl="@{imageUrl}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintDimensionRatio="H, 1:1"
+                tools:ignore="ContentDescription"
+                tools:src="@sample/characters"/>
+
+            <TextView
+                android:id="@+id/itemGridName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:ellipsize="end"
+                android:gravity="center_horizontal"
+                android:maxLines="1"
+                android:text="@{title}"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemGridImage"
+                tools:text="Abomination (Emil Blonsky)" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

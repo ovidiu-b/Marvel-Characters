@@ -1,0 +1,4 @@
+import es.openbank.dev.dependencies.Plugins
+
+apply plugin: Plugins.kotlin
+apply plugin: Plugins.kotlinKapt

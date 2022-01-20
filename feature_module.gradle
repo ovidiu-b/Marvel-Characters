@@ -1,0 +1,16 @@
+import es.openbank.dev.dependencies.Plugins
+import es.openbank.dev.dependencies.Dependencies
+
+apply plugin: Plugins.androidLibrary
+apply from: "$rootDir/kotlin_android.gradle"
+apply from: "$rootDir/feature.gradle"
+apply from: "$rootDir/common_dependencies.gradle"
+
+dependencies {
+    implementation Dependencies.Glide.core
+    annotationProcessor Dependencies.Glide.compiler
+
+    implementation Dependencies.Androidx.viewPager2
+    implementation Dependencies.Androidx.material
+    implementation Dependencies.Androidx.swipeRefreshLayout
+}

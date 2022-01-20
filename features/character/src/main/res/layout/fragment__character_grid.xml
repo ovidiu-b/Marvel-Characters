@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="es.openbank.character.ui.viewModel.CharacterGridViewModel" />
+
+        <variable
+            name="listener"
+            type="es.openbank.character.ui.adapter.RowItemClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/characters_grid_background">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/characterGridAppBarLayout"
+            android:layout_width="0dp"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/characters_grid_toolbar_color"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:src="@drawable/marvel"
+                    tools:ignore="ContentDescription" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/characterGridSwipeRefresh"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:refreshAsyncResult="@{viewModel.charactersLiveData}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/characterGridAppBarLayout">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/characterGridList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/characters_grid_background"
+                app:charactersGridList="@{viewModel.charactersLiveData}"
+                app:charactersGridListener="@{listener}"
+                app:hideWhenLoading="@{viewModel.charactersLiveData}"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                app:setGridSpacingItemDecorationSpanCount="@{2}"
+                app:setGridSpacingItemDecorationSpacing="@{@dimen/grid_items_spacing}"
+                app:setGridSpacingItemDecorationIncludeEdge="@{true}"
+                tools:listitem="@layout/row__item_grid"
+                tools:padding="20dp"/>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

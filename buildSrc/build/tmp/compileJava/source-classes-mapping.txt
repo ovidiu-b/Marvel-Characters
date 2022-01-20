@@ -1,0 +1,23 @@
+es/openbank/dev/dependencies/ClassPaths.java
+ es.openbank.dev.dependencies.ClassPaths
+es/openbank/dev/dependencies/Dependencies.java
+ es.openbank.dev.dependencies.Dependencies
+ es.openbank.dev.dependencies.Dependencies$AndroidTest
+ es.openbank.dev.dependencies.Dependencies$Androidx
+ es.openbank.dev.dependencies.Dependencies$Dagger
+ es.openbank.dev.dependencies.Dependencies$Glide
+ es.openbank.dev.dependencies.Dependencies$Kotlin
+ es.openbank.dev.dependencies.Dependencies$Moshi
+ es.openbank.dev.dependencies.Dependencies$OkHttp
+ es.openbank.dev.dependencies.Dependencies$Retrofit
+es/openbank/dev/dependencies/Plugins.java
+ es.openbank.dev.dependencies.Plugins
+es/openbank/dev/AppConfig.java
+ es.openbank.dev.AppConfig
+es/openbank/dev/dependencies/Modules.java
+ es.openbank.dev.dependencies.Modules
+es/openbank/dev/dependencies/Versions.java
+ es.openbank.dev.dependencies.Versions
+ es.openbank.dev.dependencies.Versions$Androidx
+ es.openbank.dev.dependencies.Versions$Kotlin
+ es.openbank.dev.dependencies.Versions$Test

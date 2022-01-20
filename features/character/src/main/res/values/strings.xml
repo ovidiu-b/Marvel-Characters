@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="character_has_no_description">This character has no description</string>
+    <string name="character_has_no_comics">This character has no comics, yet!</string>
+    <string name="character_has_no_series">This character has no series, yet!</string>
+</resources>

@@ -1,0 +1,20 @@
+import org.gradle.api.initialization.resolve.RepositoriesMode
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "MarvelCharacters"
+include ':app'
+include ':data:datasource'
+include ':data:model'
+include ':data:repository'
+include ':data:local'
+include ':data:remote'
+include ':data:config'
+include ':common'
+include ':navigation'
+include ':features:character'
