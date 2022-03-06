@@ -1,9 +1,11 @@
 package es.openbank.local.characters
 
+import es.openbank.common.wrappers.ErrorResult
 import es.openbank.datasource.characters.CharactersLocalDataSource
 import es.openbank.local.comics.ComicsDAO
 import es.openbank.local.comics.toBO
 import es.openbank.local.comics.toDBO
+import es.openbank.local.error.LocalErrorRequestExecutor
 import es.openbank.local.series.SeriesDAO
 import es.openbank.local.series.toBO
 import es.openbank.local.series.toDBO
@@ -18,11 +20,15 @@ class CharactersLocalDataSourceImpl(
 ): CharactersLocalDataSource {
 
     override suspend fun insertCharacter(characters: List<CharacterBO>) {
-        charactersDao.insertCharacter(characters.toDBO())
+        LocalErrorRequestExecutor.execute(ErrorResult.InsertError) {
+           charactersDao.insertCharacter(characters.toDBO())
+        }
     }
 
     override suspend fun insertCharacterComics(characterId: Int, comics: List<ComicBO>) {
-        comicsDao.insertComics(comics.toDBO(), characterId)
+        LocalErrorRequestExecutor.execute(ErrorResult.InsertError) {
+            comicsDao.insertComics(comics.toDBO(), characterId)
+        }
     }
 
     override suspend fun insertCharacterSeries(characterId: Int, series: List<SeriesBO>) {

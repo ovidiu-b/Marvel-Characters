@@ -7,7 +7,8 @@ import es.openbank.datasource.characters.CharactersRemoteDataSource
 import es.openbank.dev.TestApp
 import es.openbank.dev.di.DaggerTestAppComponent
 import es.openbank.repository.characters.CharactersRepositoryImpl
-import es.openbank.repository.util.AsyncResult
+import es.openbank.common.wrappers.AsyncResult
+import es.openbank.repository.characters.CharactersRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -24,6 +25,9 @@ class CharactersRepositoryTest {
     lateinit var local: CharactersLocalDataSource
 
     @Inject
+    lateinit var repository: CharactersRepository
+
+    @Inject
     lateinit var session: AppSessionContract
 
     @Before
@@ -32,26 +36,24 @@ class CharactersRepositoryTest {
             .application(TestApp())
             .build()
             .inject(this)
+
+        repository = CharactersRepositoryImpl(remote, local, session)
     }
 
     @Test
     fun `get characters from remote`(): Unit = runBlocking {
-        val repository = CharactersRepositoryImpl(remote, local, session)
-
         val result = repository.getCharacters(true).getResult()
 
-        assertThat(result.status).isEqualTo(AsyncResult.Status.SUCCESS)
+        assertThat(result).isInstanceOf(AsyncResult.SUCCESS::class.java)
         assertThat(result.data).isNotNull()
         assertThat(result.data).containsExactlyElementsIn(remote.getCharacters())
     }
 
     @Test
     fun `get characters from local`(): Unit = runBlocking {
-        val repository = CharactersRepositoryImpl(remote, local, session)
-
         val result = repository.getCharacters(false).getResult()
 
-        assertThat(result.status).isEqualTo(AsyncResult.Status.SUCCESS)
+        assertThat(result).isInstanceOf(AsyncResult.SUCCESS::class.java)
         assertThat(result.data).isNotNull()
         assertThat(result.data).containsExactlyElementsIn(local.getCharacters())
     }

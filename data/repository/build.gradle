@@ -5,4 +5,5 @@ dependencies {
     api project(Modules.dataModel)
     implementation project(Modules.dataDatasource)
     implementation project(Modules.dataConfig)
+    implementation project(Modules.dataCommon)
 }

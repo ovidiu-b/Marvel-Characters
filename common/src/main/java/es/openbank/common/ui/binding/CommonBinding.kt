@@ -11,7 +11,9 @@ import es.openbank.common.extensions.setInvisible
 import es.openbank.common.extensions.setVisible
 import es.openbank.common.ui.recyclerView.GridSpacingItemDecoration
 import es.openbank.common.util.strings.sanitizeHttp
-import es.openbank.repository.util.AsyncResult
+import es.openbank.common.wrappers.AsyncResult
+import es.openbank.common.wrappers.isLoading
+import es.openbank.common.wrappers.isSuccess
 
 object CommonBinding {
 
@@ -26,19 +28,19 @@ object CommonBinding {
     @BindingAdapter("app:showWhenLoading")
     @JvmStatic
     fun <T> showWhenLoading(view: View, asyncResult: AsyncResult<T>?) {
-        view.setVisible(asyncResult?.status == AsyncResult.Status.LOADING)
+        view.setVisible(asyncResult.isLoading())
     }
 
     @BindingAdapter("app:hideWhenLoading")
     @JvmStatic
     fun <T> hideWhenLoading(view: View, asyncResult: AsyncResult<T>?) {
-        view.setInvisible(asyncResult?.status == AsyncResult.Status.LOADING)
+        view.setInvisible(asyncResult.isLoading())
     }
 
     @BindingAdapter("app:refreshAsyncResult")
     @JvmStatic
     fun <T> refreshAsyncResult(view: SwipeRefreshLayout, asyncResult: AsyncResult<T>?) {
-        view.isRefreshing = asyncResult?.status == AsyncResult.Status.LOADING
+        view.isRefreshing = asyncResult.isLoading()
     }
 
     @BindingAdapter("app:showIf")
@@ -51,7 +53,7 @@ object CommonBinding {
     @JvmStatic
     fun <T> showIfAsyncResultSuccessButEmpty(view: View, asyncResult: AsyncResult<T>?) {
         val isListEmpty = asyncResult?.data is List<*> && (asyncResult.data as List<*>).isEmpty()
-        val isSuccess = asyncResult != null && asyncResult.status == AsyncResult.Status.SUCCESS
+        val isSuccess = asyncResult != null && asyncResult.isSuccess()
 
         view.isVisible = isSuccess && (asyncResult?.data == null || isListEmpty)
     }

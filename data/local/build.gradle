@@ -9,4 +9,5 @@ dependencies {
     implementation Dependencies.Androidx.roomKtx
     implementation project(Modules.dataDatasource)
     implementation project(Modules.dataModel)
+    implementation project(Modules.dataCommon)
 }

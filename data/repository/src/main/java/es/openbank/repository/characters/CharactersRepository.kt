@@ -6,10 +6,13 @@ import es.openbank.datasource.characters.CharactersRemoteDataSource
 import es.openbank.model.characterGrid.CharacterBO
 import es.openbank.model.comicGrid.ComicBO
 import es.openbank.model.seriesGrid.SeriesBO
+import es.openbank.repository.util.AsyncResultResponse
 import es.openbank.repository.util.CacheableRemoteResponse
 import es.openbank.repository.util.RepositoryResponse
 
 interface CharactersRepository {
+
+    suspend fun insertCharacter(characterBO: CharacterBO): RepositoryResponse<Unit>
 
     suspend fun getCharacters(forceRequest: Boolean): RepositoryResponse<List<CharacterBO>>
 
@@ -26,6 +29,13 @@ class CharactersRepositoryImpl(
     private val local: CharactersLocalDataSource,
     private val session: AppSessionContract
 ) : CharactersRepository {
+    override suspend fun insertCharacter(characterBO: CharacterBO): RepositoryResponse<Unit> {
+        return object: AsyncResultResponse<Unit>() {
+            override suspend fun performOperation() {
+                local.insertCharacter(listOf(characterBO))
+            }
+        }.execute()
+    }
 
     override suspend fun getCharacters(forceRequest: Boolean): RepositoryResponse<List<CharacterBO>> {
         return object: CacheableRemoteResponse<List<CharacterBO>>() {

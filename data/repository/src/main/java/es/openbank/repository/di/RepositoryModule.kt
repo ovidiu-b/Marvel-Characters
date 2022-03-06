@@ -7,14 +7,14 @@ import es.openbank.datasource.characters.CharactersLocalDataSource
 import es.openbank.datasource.characters.CharactersRemoteDataSource
 import es.openbank.repository.characters.CharactersRepository
 import es.openbank.repository.characters.CharactersRepositoryImpl
-import es.openbank.repository.util.AppDispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
 @Module
 class RepositoryModule {
 
     @Provides
-    fun appDispatchersProvider() = AppDispatchers(Dispatchers.Main, Dispatchers.IO)
+    fun coroutineDispatcherProvider(): CoroutineDispatcher = Dispatchers.IO
 
     @Provides
     fun charactersRepositoryProvider(

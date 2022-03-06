@@ -50,7 +50,10 @@ class CharactersLocalTest {
 
     @Before
     fun openDB() {
-        db = Room.inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(), AppRoomDatabase::class.java).build()
+        db = Room.inMemoryDatabaseBuilder(
+            ApplicationProvider.getApplicationContext(),
+            AppRoomDatabase::class.java
+        ).allowMainThreadQueries().build()
         charactersDao = db.charactersDao()
         comicsDao = db.comicsDao()
         seriesDao = db.seriesDao()

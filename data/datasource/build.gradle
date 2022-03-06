@@ -4,4 +4,5 @@ apply from: "$rootDir/kotlin_module.gradle"
 
 dependencies {
     implementation project(Modules.dataModel)
+    implementation project(Modules.dataCommon)
 }

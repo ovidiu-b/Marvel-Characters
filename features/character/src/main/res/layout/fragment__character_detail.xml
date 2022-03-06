@@ -11,7 +11,9 @@
 
         <import type="es.openbank.model.common.LandscapeVariantImagePath" />
 
-        <import type="es.openbank.repository.util.AsyncResult.Status" />
+        <import type="es.openbank.common.wrappers.AsyncResult" />
+
+        <import type="es.openbank.common.wrappers.AsyncResultExtensionsKt" />
 
     </data>
 
@@ -25,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="?android:attr/actionBarSize"
             android:background="@color/characters_grid_toolbar_color"
-            app:showIf="@{viewModel.characterLiveData.status == Status.SUCCESS}"
+            app:showIf="@{AsyncResultExtensionsKt.isSuccess(viewModel.characterLiveData)}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -95,7 +97,7 @@
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:background="@color/marvel_dark"
-            app:showIf="@{viewModel.characterLiveData.status == Status.SUCCESS}"
+            app:showIf="@{AsyncResultExtensionsKt.isSuccess(viewModel.characterLiveData)}"
             app:tabIconTint="@android:color/black"
             app:tabIndicatorColor="@color/marvel"
             app:tabSelectedTextColor="@color/marvel"
@@ -109,7 +111,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/marvel_dark"
-            app:showIf="@{viewModel.characterLiveData.status == Status.SUCCESS}"
+            app:showIf="@{AsyncResultExtensionsKt.isSuccess(viewModel.characterLiveData)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -5,9 +5,11 @@ import es.openbank.dev.TestApp
 import es.openbank.dev.di.DaggerTestAppComponent
 import es.openbank.remote.ApiKeyConfigContract
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import javax.inject.Inject
 
+@Ignore("I don't need to test this all the time")
 class AuthHashTest {
     private val ts = "1"
     private val correctHash = "YOUR HASH"

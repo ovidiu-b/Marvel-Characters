@@ -1,3 +1,4 @@
+import es.openbank.dev.dependencies.Modules
 import es.openbank.dev.dependencies.Plugins
 import es.openbank.dev.dependencies.Dependencies
 
@@ -13,4 +14,7 @@ dependencies {
     implementation Dependencies.Androidx.viewPager2
     implementation Dependencies.Androidx.material
     implementation Dependencies.Androidx.swipeRefreshLayout
+
+    implementation project(Modules.domain)
+    implementation project(Modules.dataCommon)
 }

@@ -1,7 +1,28 @@
 package es.openbank.repository.util
 
-interface RepositoryResponse<Type> {
+import es.openbank.common.wrappers.AsyncResult
+import es.openbank.common.wrappers.ErrorResult
 
-    fun getResult(): AsyncResult<Type>
+interface RepositoryResponse<T> {
+
+    companion object {
+        fun <T> onSuccess(getData: () -> T): RepositoryResponse<T> {
+            return object : RepositoryResponse<T> {
+                override fun getResult(): AsyncResult<T> {
+                    return AsyncResult.SUCCESS(getData())
+                }
+            }
+        }
+
+        fun <T> onError(getError: () -> ErrorResult): RepositoryResponse<T> {
+            return object : RepositoryResponse<T> {
+                override fun getResult(): AsyncResult<T> {
+                    return AsyncResult.ERROR(getError())
+                }
+            }
+        }
+    }
+
+    fun getResult(): AsyncResult<T>
 
 }

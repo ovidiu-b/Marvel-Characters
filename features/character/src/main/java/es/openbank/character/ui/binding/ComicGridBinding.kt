@@ -4,7 +4,8 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import es.openbank.character.ui.adapter.ComicGridAdapter
 import es.openbank.model.comicGrid.ComicBO
-import es.openbank.repository.util.AsyncResult
+import es.openbank.common.wrappers.AsyncResult
+import es.openbank.common.wrappers.isSuccess
 
 object ComicGridBinding {
 
@@ -15,7 +16,7 @@ object ComicGridBinding {
             recyclerView.adapter = ComicGridAdapter()
         }
 
-        if (listResult != null && listResult.status == AsyncResult.Status.SUCCESS && listResult.data != null) {
+        if (listResult != null && listResult.isSuccess() && listResult.data != null) {
             (recyclerView.adapter as ComicGridAdapter).submitList(listResult.data)
         }
     }

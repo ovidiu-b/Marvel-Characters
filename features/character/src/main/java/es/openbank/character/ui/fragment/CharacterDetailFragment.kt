@@ -14,7 +14,8 @@ import es.openbank.common.di.ViewModelFactory
 import es.openbank.common.ui.BaseFragment
 import es.openbank.common.ui.BaseViewModel
 import es.openbank.model.characterGrid.CharacterBO
-import es.openbank.repository.util.AsyncResult
+import es.openbank.common.wrappers.AsyncResult
+import es.openbank.common.wrappers.isError
 import javax.inject.Inject
 
 class CharacterDetailFragment: BaseFragment() {
@@ -29,8 +30,8 @@ class CharacterDetailFragment: BaseFragment() {
     private lateinit var binding: FragmentCharacterDetailBinding
 
     private val characterObserver = Observer<AsyncResult<CharacterBO?>> {
-        if (it.status == AsyncResult.Status.ERROR) {
-            showErrorMessage(it.error?.message ?: "There was a problem fetching this character, please try again")
+        if (it.isError()) {
+            showErrorMessage("There was a problem fetching this character, please try again")
         }
     }
 

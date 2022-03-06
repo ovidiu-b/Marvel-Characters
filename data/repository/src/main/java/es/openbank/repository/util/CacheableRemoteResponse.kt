@@ -1,7 +1,8 @@
 package es.openbank.repository.util
 
-import es.openbank.model.error.ErrorResult
-import es.openbank.model.error.RemoteRequestException
+import es.openbank.common.wrappers.AsyncResult
+import es.openbank.common.wrappers.ErrorResult
+import es.openbank.common.wrappers.ErrorResultException
 
 abstract class CacheableRemoteResponse<ResultType> {
 
@@ -12,15 +13,14 @@ abstract class CacheableRemoteResponse<ResultType> {
             if (localResult == null || shouldRequestFromRemote(localResult)) {
                 requestRemoteCall().run {
                     saveRemoteResponse(this)
-                    AsyncResult.success(this)
+                    AsyncResult.SUCCESS(this)
                 }
             } else {
-                AsyncResult.success(localResult)
+                AsyncResult.SUCCESS(localResult)
             }
-        } catch (e: Exception) {
-            val asyncError = (e as? RemoteRequestException)?.errorResponse
-                ?: ErrorResult.UnknownError("Ha ocurrido un error inesperado", e)
-            AsyncResult.error(asyncError)
+        } catch (e: Throwable) {
+            val asyncError = (e as? ErrorResultException)?.errorResult ?: ErrorResult.UnknownError
+            AsyncResult.ERROR(asyncError)
         }
 
         return object : RepositoryResponse<ResultType> {

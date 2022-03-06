@@ -1,5 +1,6 @@
 package es.openbank.dev.util
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import java.util.concurrent.CountDownLatch
@@ -12,6 +13,7 @@ import java.util.concurrent.TimeoutException
  * Use this extension from host-side (JVM) tests. It's recommended to use it alongside
  * `InstantTaskExecutorRule` or a similar mechanism to execute tasks synchronously.
  */
+@VisibleForTesting(otherwise = VisibleForTesting.NONE)
 fun <T> LiveData<T>.getOrAwaitValue(
     time: Long = 2,
     timeUnit: TimeUnit = TimeUnit.SECONDS,

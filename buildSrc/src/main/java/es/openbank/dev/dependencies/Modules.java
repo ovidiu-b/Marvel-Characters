@@ -11,4 +11,6 @@ public class Modules {
     public static final String dataRemote = ":data:remote";
     public static final String dataRepository = ":data:repository";
     public static final String dataConfig = ":data:config";
+    public static final String dataCommon = ":data:common";
+    public static final String domain = ":domain";
 }
